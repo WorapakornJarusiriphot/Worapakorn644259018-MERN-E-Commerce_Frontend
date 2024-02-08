@@ -1,0 +1,243 @@
+[
+    {
+      "_id": "1",
+      "name": "Casual T-Shirt",
+      "description": "Comfortable cotton t-shirt perfect for everyday wear.",
+      "price": 19.99,
+      "image": "https://source.unsplash.com/random/100x100/?t-shirt",
+      "category": "Clothing"
+    },
+    {
+      "_id": "2",
+      "name": "Leather Belt",
+      "description": "High-quality leather belt with a classic buckle.",
+      "price": 29.99,
+      "image": "https://source.unsplash.com/random/100x100/?belt",
+      "category": "popular"
+    },
+    {
+      "_id": "3",
+      "name": "Smart Watch",
+      "description": "Advanced smart watch with fitness tracking capabilities.",
+      "price": 199.99,
+      "image": "https://source.unsplash.com/random/100x100/?smartwatch",
+      "category": "Gadgets"
+    },
+    {
+      "_id": "4",
+      "name": "Branded Cap",
+      "description": "Stylish cap with iconic brand logo.",
+      "price": 24.99,
+      "image": "https://source.unsplash.com/random/100x100/?cap",
+      "category": "Swag"
+    },
+    {
+      "_id": "5",
+      "name": "Running Sneakers",
+      "description": "Lightweight sneakers for optimal running performance.",
+      "price": 99.99,
+      "image": "https://source.unsplash.com/random/100x100/?sneakers",
+      "category": "popular"
+    },
+    {
+      "_id": "6",
+      "name": "Sunglasses",
+      "description": "UV-protected stylish sunglasses for sunny days.",
+      "price": 49.99,
+      "image": "https://source.unsplash.com/random/100x100/?sunglasses",
+      "category": "Accessories"
+    },
+    {
+      "_id": "7",
+      "name": "Wireless Earbuds",
+      "description": "High-quality sound wireless earbuds with long battery life.",
+      "price": 129.99,
+      "image": "https://source.unsplash.com/random/100x100/?earbuds",
+      "category": "Gadgets"
+    },
+    {
+      "_id": "8",
+      "name": "Graphic Tee",
+      "description": "Trendy graphic tee with a unique design.",
+      "price": 34.99,
+      "image": "https://source.unsplash.com/random/100x100/?graphic-tee",
+      "category": "popular"
+    },
+    {
+      "_id": "9",
+      "name": "Denim Jeans",
+      "description": "Classic denim jeans with a comfortable fit.",
+      "price": 59.99,
+      "image": "https://source.unsplash.com/random/100x100/?jeans",
+      "category": "Clothing"
+    },
+    {
+      "_id": "10",
+      "name": "Watch",
+      "description": "Elegant watch with a timeless design.",
+      "price": 249.99,
+      "image": "https://source.unsplash.com/random/100x100/?watch",
+      "category": "Accessories"
+    },
+    {
+      "_id": "11",
+      "name": "Bluetooth Speaker",
+      "description": "Portable Bluetooth speaker with crystal-clear sound.",
+      "price": 79.99,
+      "image": "https://source.unsplash.com/random/100x100/?speaker",
+      "category": "popular"
+    },
+    {
+      "_id": "12",
+      "name": "Branded Hoodie",
+      "description": "Cozy hoodie with soft inner lining and brand logo.",
+      "price": 69.99,
+      "image": "https://source.unsplash.com/random/100x100/?hoodie",
+      "category": "Swag"
+    },
+    {
+      "_id": "13",
+      "name": "Formal Shirt",
+      "description": "Elegant formal shirt for business or special occasions.",
+      "price": 89.99,
+      "image": "https://source.unsplash.com/random/100x100/?formal-shirt",
+      "category": "Clothing"
+    },
+    {
+      "_id": "14",
+      "name": "Leather Wallet",
+      "description": "Compact leather wallet with multiple card slots.",
+      "price": 39.99,
+      "image": "https://source.unsplash.com/random/100x100/?wallet",
+      "category": "popular"
+    },
+    {
+      "_id": "15",
+      "name": "Tablet",
+      "description": "Powerful tablet for entertainment and productivity.",
+      "price": 299.99,
+      "image": "https://source.unsplash.com/random/100x100/?tablet",
+      "category": "Gadgets"
+    },
+    {
+      "_id": "16",
+      "name": "Branded Tote Bag",
+      "description": "Fashionable tote bag with spacious interior.",
+      "price": 79.99,
+      "image": "https://source.unsplash.com/random/100x100/?tote-bag",
+      "category": "popular"
+    },
+    {
+      "_id": "17",
+      "name": "Jogging Pants",
+      "description": "Comfortable jogging pants for sports and relaxation.",
+      "price": 49.99,
+      "image": "https://source.unsplash.com/random/100x100/?jogging-pants",
+      "category": "Clothing"
+    },
+    {
+      "_id": "18",
+      "name": "Backpack",
+      "description": "Durable backpack for travel and everyday use.",
+      "price": 59.99,
+      "image": "https://source.unsplash.com/random/100x100/?backpack",
+      "category": "Accessories"
+    },
+    {
+      "_id": "19",
+      "name": "Fitness Tracker",
+      "description": "Advanced fitness tracker to monitor your health and activity.",
+      "price": 159.99,
+      "image": "https://source.unsplash.com/random/100x100/?fitness-tracker",
+      "category": "Gadgets"
+    },
+    {
+      "_id": "20",
+      "name": "Branded Sneakers",
+      "description": "High-performance sneakers with unique brand design.",
+      "price": 129.99,
+      "image": "https://source.unsplash.com/random/100x100/?sneakers",
+      "category": "Swag"
+    },
+    {
+      "_id": "21",
+      "name": "Winter Coat",
+      "description": "Warm and stylish winter coat for cold weather.",
+      "price": 149.99,
+      "image": "https://source.unsplash.com/random/100x100/?coat",
+      "category": "Clothing"
+    },
+    {
+      "_id": "22",
+      "name": "Scarf",
+      "description": "Soft and cozy scarf to keep you warm.",
+      "price": 19.99,
+      "image": "https://source.unsplash.com/random/100x100/?scarf",
+      "category": "popular"
+    },
+    {
+      "_id": "23",
+      "name": "Smartphone",
+      "description": "Latest model smartphone with high-end features.",
+      "price": 999.99,
+      "image": "https://source.unsplash.com/random/100x100/?smartphone",
+      "category": "Gadgets"
+    },
+    {
+      "_id": "24",
+      "name": "Branded Water Bottle",
+      "description": "Eco-friendly water bottle with brand logo.",
+      "price": 29.99,
+      "image": "https://source.unsplash.com/random/100x100/?water-bottle",
+      "category": "Swag"
+    },
+    {
+      "_id": "25",
+      "name": "Athletic Shorts",
+      "description": "Breathable athletic shorts for maximum comfort.",
+      "price": 29.99,
+      "image": "https://source.unsplash.com/random/100x100/?shorts",
+      "category": "Clothing"
+    },
+    {
+      "_id": "26",
+      "name": "Earrings",
+      "description": "Elegant earrings to complement any outfit.",
+      "price": 49.99,
+      "image": "https://source.unsplash.com/random/100x100/?earrings",
+      "category": "popular"
+    },
+    {
+      "_id": "27",
+      "name": "Laptop",
+      "description": "Ultra-slim laptop for on-the-go productivity.",
+      "price": 1099.99,
+      "image": "https://source.unsplash.com/random/100x100/?laptop",
+      "category": "Gadgets"
+    },
+    {
+      "_id": "28",
+      "name": "Branded Keychain",
+      "description": "Stylish keychain with iconic brand emblem.",
+      "price": 9.99,
+      "image": "https://source.unsplash.com/random/100x100/?keychain",
+      "category": "popular"
+    },
+    {
+      "_id": "29",
+      "name": "Yoga Pants",
+      "description": "Flexible yoga pants for all your workout needs.",
+      "price": 39.99,
+      "image": "https://source.unsplash.com/random/100x100/?yoga-pants",
+      "category": "Clothing"
+    },
+    {
+      "_id": "30",
+      "name": "Handbag",
+      "description": "Chic handbag for your daily essentials.",
+      "price": 89.99,
+      "image": "https://source.unsplash.com/random/100x100/?handbag",
+      "category": "popular"
+    }
+  ]
+  
