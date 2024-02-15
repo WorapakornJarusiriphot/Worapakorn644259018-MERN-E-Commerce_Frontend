@@ -1,11 +1,11 @@
-import { useState, useEffect, React } from 'react'
-import Card from '../../components/Card'
+import { useState, useEffect } from "react";
+import Card from "../../components/Card";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [sortOptions, setSortOptions] = useState("default");
+  const [sortOption, setSortOption] = useState("default");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(8);
   const [categories, setCategories] = useState([]);
@@ -16,28 +16,28 @@ const ProductList = () => {
         const response = await fetch("/product.json");
         const data = await response.json();
         setProducts(data);
-        //setFilterItems(data);
-        setCategories(["all", ...new Set(data.map((item) => item.category))]);
+        setFilteredItems(data);
+        //setCategories(["all", ...data.map((item) => item.category)]);
+        setCategories(["all", ...new Set(data.map((item) => item.category))]); 
       } catch (error) {
-        console.error("Error fetching data : ", error);
+        console.error("Error fetching data:", error);
       }
-    }
+    };
     fetchData();
-  }, [])
+  }, []);
 
   const filterItems = (category) => {
     const filtered =
       category === "all"
         ? products
         : products.filter((item) => item.category === category);
-    //setFilterItems(filtered);
-    handleSortChange(sortOptions, filtered)
+    //setFilteredItems(filtered);
+    handleSortChange(sortOption, filtered);
     setSelectedCategory(category);
     setCurrentPage(1);
-  }
-
-  const handleSortChange = (option ,products) => {
-    setSortOptions(option);
+  };
+  const handleSortChange = (option, products) => {
+    setSortOption(option);
     let sortedItems = [...products];
     switch (option) {
       case "A-Z":
@@ -70,17 +70,18 @@ const ProductList = () => {
 
   return (
     <div>
-      {/* {Product List Banner} */}
+      {/* Product List Banner */}
       <div className="section-container bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%">
         <div className="py-48 flex flex-col justify-center items-center">
           <div className="text-center space-y-7 px-4">
             <h2 className="md:text-4xl text-4xl font-bold md:leading-snug leading-snug">
-              Unleash Your Inner <span className="text-red">Geek</span> : <br />{" "}
-              Shop ourExclusive Tech-themed Merchandises!
+              Unleash Your Inner <span className="text-red">Geek</span>: <br />{" "}
+              Shop Our Exclusive Tech-themed Merchandises!
             </h2>
             <p className="text-xl text-[#4A4A4A]">
-              Our mission: To merge fashion with functionality in the world of
-              Software Engineering
+              We offer a curated selection of high-quality products ranging from clothing and accessories to home decor and office essentials.
+              Each item is carefully chosen to meet our standards of quality,
+              functionality, and style.
             </p>
             <button className="btn bg-red px-8 py-3 font-semibold text-white rounded-full">
               Order Now
@@ -89,69 +90,72 @@ const ProductList = () => {
         </div>
       </div>
       {/* Product List card */}
-      <div className='section-container'>
-        <div className='flex flex-col md:flex-row flex-wrap md:justify-between items-center space-y-3 mb-8'>
+      <div className="section-container">
+        <div className="flex flex-col md:flex-row flex-wrap md:justify-between items-center space-y-3 mb-8">
           {/* Filter */}
-          <div className='flex flex-row justify-start md:items-center md:gap-8 gap-4 flex-wrap'>
+          <div className="flex flex-row justify-start md:items-center md:gap-8 gap-4 flex-wrap">
             {categories.map((category, index) => {
               return (
                 <button
                   key={index}
                   onClick={() => filterItems(category)}
-                  className={`${selectedCategory === category ? "active" : ""}
-                px-4 py-2 rounded-full`}>
-                  <p className='capitalize'>{category}</p>
+                  className={`${selectedCategory === category ? "active" : ""
+                    } px-4 py-2 rounded-full`}
+                >
+                  <p className="capitalize">{category}</p>
                 </button>
-              )
+              );
             })}
-
           </div>
           {/* Sort Option */}
-          <div className='flex justify-end mb-4 rounded-sm'>
-            <div className='bg-black p-2'>
-              <select 
-              id="sort" 
-              className='bg-black text-white px-2 rounded-sm' 
-              onChange={(e) => 
-                handleSortChange(e.target.value, filteredItems)}
-              value={sortOptions}
+          <div className="flex justify-end mb-4 rounded-sm">
+            <div className="flex bg-black p-2 items-center"> {/* ใช้ 'flex' แทน 'flex-row' และเพิ่ม 'items-center' */}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" className="w-6 h-6 mr-2"> {/* เพิ่ม 'mr-2' เพื่อให้มีพื้นที่ระหว่างไอคอนกับ dropdown */}
+                <path d="M6 12a.75.75 0 0 1-.75-.75v-7.5a.75.75 0 1 1 1.5 0v7.5A.75.75 0 0 1 6 12ZM18 12a.75.75 0 0 1-.75-.75v-7.5a.75.75 0 0 1 1.5 0v7.5A.75.75 0 0 1 18 12ZM6.75 20.25v-1.5a.75.75 0 0 0-1.5 0v1.5a.75.75 0 0 0 1.5 0ZM18.75 18.75v1.5a.75.75 0 0 1-1.5 0v-1.5a.75.75 0 0 1 1.5 0ZM12.75 5.25v-1.5a.75.75 0 0 0-1.5 0v1.5a.75.75 0 0 0 1.5 0ZM12 21a.75.75 0 0 1-.75-.75v-7.5a.75.75 0 0 1 1.5 0v7.5A.75.75 0 0 1 12 21ZM3.75 15a2.25 2.25 0 1 0 4.5 0 2.25 2.25 0 0 0-4.5 0ZM12 11.25a2.25 2.25 0 1 1 0-4.5 2.25 2.25 0 0 1 0 4.5ZM15.75 15a2.25 2.25 0 1 0 4.5 0 2.25 2.25 0 0 0-4.5 0Z" />
+              </svg>
+              <select
+                id="sort"
+                className="bg-black text-white px-2 rounded-sm"
+                onChange={(e) => handleSortChange(e.target.value, filteredItems)}
+                value={sortOption}
               >
                 <option value={"default"}>Default</option>
                 <option value={"A-Z"}>A-Z</option>
                 <option value={"Z-A"}>Z-A</option>
-                <option value={"low-to-high"}>low-to-high</option>
-                <option value={"high-to-low"}>high-to-low</option>
+                <option value={"low-to-high"}>Low to High</option>
+                <option value={"high-to-low"}>High to Low</option>
               </select>
             </div>
-          {/* Product Card */}
-          <div className='grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4'>
+          </div>
+          {/* Product Card  */}
+          <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4">
             {currentItems.map((item, index) => (
               <Card key={index} item={item} />
             ))}
           </div>
-          {/* Pagination */}
-          <div className='flex justify-center my-8 flex-wrap gap-2'>
-              {
-                Array.from({
-                  length: Math.ceil(filteredItems.length/itemsPerPage)
-                }).map((_, index) => {
-                  return (
-                  <button key={index} 
-                  className={`mx-1 py-1 rounded-full ${currentPage === index +1 ? "bg-red text-white " : "bg-gray-200"}`}
-                  onClick={() => {
-                    paginate(index + 1);
-                  }}
-                  >
-                    {index + 1}
-                  </button>)
-                })
-              }
-          </div>
-          </div>
         </div>
       </div>
+      {/* Pagination */}
+      <div className="flex justify-center  my-8 flex-wrap gap-2">
+        {Array.from({
+          length: Math.ceil(filteredItems.length / itemsPerPage),
+        }).map((_, index) => {
+          return (
+            <button
+              key={index}
+              className={`mx-1 px-3 py-1 rounded-full ${currentPage === index + 1 ? "bg-red text-white" : "bg-gray-200"
+                }`}
+              onClick={() => {
+                paginate(index + 1);
+              }}
+            >
+              {index + 1}
+            </button>
+          );
+        })}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductList
+export default ProductList;
