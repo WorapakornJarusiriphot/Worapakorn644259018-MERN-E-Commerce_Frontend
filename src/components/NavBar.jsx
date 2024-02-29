@@ -90,7 +90,7 @@ const NavBar = () => {
                                 alt=""
                                 className="h-6 lg:h-12 pr-1 mx-auto"
                             />
-                            <span className="text-red">TEST</span>SE Souvenir Shop
+                            <span className="text-red">SE Souvenir Shop</span>
                         </a>
                     </div>
                     <div className="navbar-center hidden lg:flex">
