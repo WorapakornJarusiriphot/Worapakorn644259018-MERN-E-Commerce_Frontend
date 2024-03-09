@@ -27,3 +27,20 @@ nav {
   text-underline-offset: 5px;
   @apply text-red;
 }
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Optional for vertical centering */
+}
+
+/* Add this to your CSS file */
+.table-header {
+  background-color: #9f1239; /* This is a placeholder color for pig's blood red, adjust as needed */
+  color: #ffffff;
+}
+
+.lws-removeFromCart {
+  color:#9f1239;
+  /* Add other button styling as needed */
+}
