@@ -1,34 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import Modal from "./Modal";
 import { AuthContext } from "../context/AuthProvider";
 import Profile from "./Profile";
-import axios from "axios";
+import useCart from "../hook/useCart";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
-  const { user, setUser, createUser } = useContext(AuthContext);
-  console.log(user);
-  const [quantity, setQuantity] = useState(0);
-
-  useEffect(() => {
-    // Assuming 'user' contains the email of the current user
-    // and your API endpoint to get cart items by email is 'http://localhost:5000/carts/:email'
-    if (user && user.email) {
-      axios
-        .get(`http://localhost:5000/carts/${user.email}`)
-        .then((response) => {
-          // Sum up the quantities of all cart items
-          const totalQuantity = response.data.reduce(
-            (acc, item) => acc + item.quantity,
-            0
-          );
-          setQuantity(totalQuantity);
-        })
-        .catch((error) => {
-          console.error("There was an error fetching the cart items", error);
-        });
-    }
-  }, [user]); // Depend on 'user' so the effect runs again if the user changes
-
+  const { user, setUser, createrUser } = useContext(AuthContext);
+  const [cart, refetch] = useCart();
+  console.log(cart);
   const navItems = (
     <>
       <li>
@@ -84,7 +64,6 @@ const NavBar = () => {
                 tabIndex={0}
                 role="button"
                 className="btn btn-ghost lg:hidden"
-
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -141,27 +120,28 @@ const NavBar = () => {
               tabIndex={0}
               role="button"
               className="btn btn-ghost btn-circle hidden sm:flex mr-3 items-center justify-center"
-              onClick={() => window.location.href = "/cart"}
             >
-              <div className="indicator">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  />
-                </svg>
-                <span className="badge badge-sm indicator-item">
-                  {quantity}
-                </span>
-              </div>
+              <Link to="/cart">
+                <div className="indicator">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                  <span className="badge badge-sm indicator-item">
+                    {cart.length || 0}
+                  </span>
+                </div>
+              </Link>
             </div>
             {user ? (
               <>

@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ImBin2 } from "react-icons/im";
 import axios from "axios";
-import { AuthContext } from "../context/AuthProvider";
+import { AuthContext } from "../../context/AuthProvider";
 import Swal from "sweetalert2";
+import useCart from "../../hook/useCart";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [cart, refetch] = useCart();
 
   // Function to fetch cart items from the backend
   useEffect(() => {
@@ -38,8 +40,8 @@ const Cart = () => {
   }, [user]);
 
   // Calculate total items and total price
-  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-  const totalPrice = cartItems.reduce(
+  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+  const totalPrice = cart.reduce(
     (acc, item) => acc + item.quantity * item.price,
     0
   );
@@ -62,7 +64,7 @@ const Cart = () => {
         }
       );
       setCartItems(
-        cartItems.map((item) =>
+        cart.map((item) =>
           item._id === itemId
             ? { ...item, quantity: response.data.quantity }
             : item
@@ -83,7 +85,7 @@ const Cart = () => {
     }
   };
 
-  const handleRemoveFromCart = async (itemId) => {
+  const handleRemoveFromCart = async (item) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -92,34 +94,23 @@ const Cart = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
+    }).then((result) => {
       if (result.isConfirmed) {
-        try {
-          // Send a DELETE request to the backend
-          await axios.delete(`http://localhost:5000/carts/${itemId}`);
-
-          // Filter out the deleted item from the cartItems state
-          const updatedCartItems = cartItems.filter(
-            (item) => item._id !== itemId
-          );
-          setCartItems(updatedCartItems);
-
-          // Show success message
-          Swal.fire({
-            title: "Deleted!",
-            text: "Your item has been deleted.",
-            icon: "success",
+        axios.delete(`http://localhost:5000/carts/${item._id}`) // ใช้ template literals สำหรับ string
+          .then((response) => { // แก้ไขการสะกดคำผิด
+            if (response) {
+              refetch(); // โหลดข้อมูลตะกร้าใหม่
+              Swal.fire("Deleted!", "Your product has been deleted.", "success");
+            }
+          })
+          .catch((error) => {
+            console.error("Error removing cart item:", error);
+            Swal.fire({
+              title: "Error!",
+              text: "There was a problem removing your item.",
+              icon: "error",
+            });
           });
-
-          console.log(`Item with ID: ${itemId} has been removed.`);
-        } catch (error) {
-          console.error("Error removing cart item:", error);
-          Swal.fire({
-            title: "Error!",
-            text: "There was a problem removing your item.",
-            icon: "error",
-          });
-        }
       }
     });
   };
@@ -150,7 +141,7 @@ const Cart = () => {
           </tr>
         </thead>
         <tbody>
-          {cartItems.map((item, index) => (
+          {cart.map((item, index) => (
             <tr
               style={{ textAlign: "center", verticalAlign: "middle" }}
               key={item._id}
@@ -190,7 +181,7 @@ const Cart = () => {
               <td className="p-2">
                 <button
                   className="lws-removeFromCart"
-                  onClick={() => handleRemoveFromCart(item._id)}
+                  onClick={() => handleRemoveFromCart(item)}
                 >
                   <ImBin2 />
                 </button>

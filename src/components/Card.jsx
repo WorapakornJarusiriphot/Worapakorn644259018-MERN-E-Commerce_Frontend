@@ -3,10 +3,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthProvider";
 import axios from "axios";
+import useCart from "../hook/useCart";
 
 const Card = ({ item }) => {
   const { _id, name, image, price, description } = item;
   const { user } = useContext(AuthContext);
+  const [cart, refetch] = useCart();
   const navigate = useNavigate();
   const location = useLocation();
   const [isHeartFilled, setIsHeartFilled] = useState(false);
@@ -14,7 +16,9 @@ const Card = ({ item }) => {
     setIsHeartFilled(!isHeartFilled);
   };
   const handleAddToCart = (item) => {
+    // console.log("clicked");
     if (user && user.email) {
+      // console.log("found email");
       const cartItem = {
         productId: item._id,
         name: item.name,
@@ -23,14 +27,33 @@ const Card = ({ item }) => {
         image: item.image,
         quantity: 1,
       };
-      Swal.fire({
-        title: "Product added on the cart",
-        position: "center",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      axios.post("http://localhost:5000/carts", cartItem).then();
+      console.log(cartItem);
+      axios
+        .post("http://localhost:5000/carts", cartItem)
+        .then((response) => {
+          console.log(response);
+          if (response.status === 200 || response.status === 201) {
+            refetch();
+            Swal.fire({
+              title: "Product added on the cart",
+              position: "center",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          const errorMessage = error.response.data.message;
+          Swal.fire({
+            title: `${errorMessage}`,
+            position: "center",
+            icon: "warning",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        });
     } else {
       Swal.fire({
         title: "Please login to add an item to your cart!",
