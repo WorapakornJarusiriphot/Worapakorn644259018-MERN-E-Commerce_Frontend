@@ -8,10 +8,9 @@ import SignIn from "../components/SignIn";
 import UpdateProfile from "../pages/dashboard/UpdateProfile";
 import PrivateRouter from "../PrivateRouter/PrivateRouter";
 import Cart from "../pages/shop/Cart";
-import Admin from "../layout/Admin";
-import Add_Product from "../pages/Admin/Add_Product";
-import All_Users from "../pages/Admin/All_Users";
-import Admin_All_Users from "../layout/Admin_All_Users";
+import DashboardLayout from "../layout/DashboardLayout";
+import User from "../pages/dashboard/admin/User";
+import Dashboard from "../pages/dashboard/admin/User";
 
 const router = createBrowserRouter([
   {
@@ -45,25 +44,16 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/",
-    element: <Admin />,
+    path: "dashboard",
+    element: <DashboardLayout />,
     children: [
+      { path: "users", element: <User /> },
       {
-        path: "/add-product",
-        element: <Add_Product />,
+        path: "",
+        element: <Dashboard />,
       },
     ],
-  }, 
-  {
-    path: "/",
-    element: <Admin_All_Users />,
-    children: [
-      {
-        path: "/all-users",
-        element: <All_Users />,
-      },
-    ],
-  },  
+  },
   {
     path: "/signup",
     element: <SignUp />,
@@ -72,10 +62,6 @@ const router = createBrowserRouter([
     path: "/signin",
     element: <SignIn />,
   },
-  // {
-  //   path: "/admin_panel",
-  //   element: <Drawer />,
-  // },
 ]);
 
 export default router;
