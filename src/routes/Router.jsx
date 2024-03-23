@@ -10,7 +10,8 @@ import PrivateRouter from "../PrivateRouter/PrivateRouter";
 import Cart from "../pages/shop/Cart";
 import DashboardLayout from "../layout/DashboardLayout";
 import User from "../pages/dashboard/admin/User";
-import Dashboard from "../pages/dashboard/admin/User";
+import Dashboard from "../pages/dashboard/admin/Dashboard";
+import Add_Product from "../pages/dashboard/admin/Add_Product";
 
 const router = createBrowserRouter([
   {
@@ -45,12 +46,20 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRouter>
+        <DashboardLayout />
+      </PrivateRouter>
+    ),
     children: [
       { path: "users", element: <User /> },
       {
         path: "",
         element: <Dashboard />,
+      },
+      {
+        path: "addProducts", //addProducts
+        element: <Add_Product />,
       },
     ],
   },

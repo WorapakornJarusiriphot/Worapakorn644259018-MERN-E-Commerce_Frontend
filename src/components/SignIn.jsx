@@ -2,12 +2,15 @@ import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FaGoogle, FaFacebook, FaGithub } from "react-icons/fa";
-import { AuthContext } from "../context/AuthProvider";
+import useAuth from "../hook/useAuth";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../hook/useAxiosPublic";
 
 const SignIn = () => {
-  const { login, signUpWithGoogle } = useContext(AuthContext);
+  const { login, sigUpWithGoogle } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
   const from = location?.state?.from?.pathname || "/";
   const {
     register,
@@ -22,21 +25,42 @@ const SignIn = () => {
       .then((result) => {
         const user = result.user;
         //console.log(user);
-        alert("Login Successful");
+        Swal.fire({
+          title: "Login Successfully",
+          icon: "success",
+          timer: 1500,
+        });
 
         navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log(error);
+
+        Swal.fire({
+          title: "Enail or Password inccorect, Please try again",
+          icon: "error",
+        });
       });
   };
   const googleSignUp = () => {
-    signUpWithGoogle()
+    sigUpWithGoogle()
       .then((result) => {
         const user = result.user;
-        console.log(user);
-        alert("Google Sign Up Successfully");
-        document.getElementById("login").close();
+        const userInfo = {
+          name: result.user?.displayName,
+          email: result.user?.email,
+          photoURL: result.user?.photoURL,
+        };
+        axiosPublic.post("/users", userInfo).then((response) => {
+          //console.log(response);
+          //console.log(user);
+          Swal.fire({
+            title: "Google Sign Up Successfully",
+            icon: "success",
+            timer: 1500,
+          });
+          navigate(from, { replace: true });
+        });
       })
       .catch((error) => {
         console.log(error);

@@ -7,9 +7,14 @@ import { IoIosAddCircle } from "react-icons/io";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { FaRegUser, FaUserEdit } from "react-icons/fa";
 import { Outlet } from "react-router-dom";
+import useAdmin from "../hook/useAdmin";
+import { MdContactSupport } from "react-icons/md";
+import { FaShoppingCart, FaLocationArrow } from "react-icons/fa";
 
 const DashboardLayout = () => {
-  const isAdmin = true;
+  const [isAdmin, isAdminLoading] = useAdmin();
+  // console.log(isAdmin, isAdminLoading);
+  // const isAdmin = true;
   return (
     <div>
       {isAdmin ? (
@@ -60,7 +65,7 @@ const DashboardLayout = () => {
                 </Link>
               </li>
               <li>
-                <Link>
+                <Link to="/dashboard/addProducts">
                   <IoIosAddCircle />
                   Add Product
                 </Link>
@@ -78,6 +83,27 @@ const DashboardLayout = () => {
                 </Link>
               </li>
               <hr />
+              <br />
+              <li>
+                <a>
+                  <MdDashboard /> Home
+                </a>
+              </li>
+              <li>
+                <a>
+                  <FaShoppingCart /> Products
+                </a>
+              </li>
+              <li>
+                <a>
+                  <FaLocationArrow /> Order Tracking
+                </a>
+              </li>
+              <li>
+                <a>
+                  <MdContactSupport /> Customer Support
+                </a>
+              </li>
             </ul>
           </div>
         </div>
